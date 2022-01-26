@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<!-- Content -->
+		<section>
+			<header class="main">
+				<h1>{{ food.title }}</h1>
+			</header>
+
+			<span class="image main"><img src="{{ food.image.url }}" style="width: 450; height: 500;" alt="" /></span>
+
+			<p>Price: {{ food.price }} c</p>
+			
+
+			<hr class="major" />
+			{%for image in images %}
+		<img src="{{ image.url }}" style="width: 450px; height: 450px;" class="img-thumbnail" alt="...">
+			{% endfor %}
+
+
+		</section>
+{% endblock %}

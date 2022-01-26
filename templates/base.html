@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+	<head>
+		<title>{% block title %} {% endblock%}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css'%}" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+								</header>
+                        {% block content%}{% endblock%}
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="get" action="{% url 'home' %}">
+										<input type="text" name="q" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="{% url 'home' %}">All the Food</a></li>
+										<li>
+											<span class="opener">Food Companies</span>
+											<ul>
+												{%for company in companies %}
+												<li><a href="{% url 'company' company.slug %}">{{ company }}</a></li>
+												{% endfor %}
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+							<!-- Section -->
+
+
+							<!-- Footer -->
+
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js'%}"></script>
+			<script src="{% static 'assets/js/util.js'% }"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+
+	</body>
+</html>
