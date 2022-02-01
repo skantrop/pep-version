@@ -10,7 +10,14 @@
 			<span class="image main"><img src="{{ food.image.url }}" style="width: 450; height: 500;" alt="" /></span>
 
 			<p>Price: {{ food.price }} c</p>
-			
+
+			{{food.id}}
+
+			<form enctype="multipart/form-data" action="{% url "cart:cart_add" food.id %}" method="post" >
+				{% csrf_token %}
+				{{ cart_product_form }}
+				<input type="submit" value="add to cart" class="btn btn-primary">
+			</form>
 
 			<hr class="major" />
 			{%for image in images %}

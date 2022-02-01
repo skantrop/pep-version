@@ -20,7 +20,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('catalog/', include('main.urls'))
+    path('catalog/', include('main.urls')),
+    path('orders/', include('order.urls')),
+    path('cart/', include('cart.urls')),
 ]
 
 if settings.DEBUG:

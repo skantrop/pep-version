@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # myapps
     'account',
     'main',
+    'order',
+
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'account.User'
 
+CART_SESSION_ID = 'cart'

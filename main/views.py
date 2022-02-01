@@ -1,4 +1,5 @@
 from datetime import timedelta
+from itertools import product
 
 from django.utils import timezone
 from django.db.models import Q
@@ -9,7 +10,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView
 
-from .forms import RecipeForm
+from cart.forms import CartAddProductForm
 from .models import *
 
 
@@ -33,11 +34,11 @@ class MainPageView(ListView):
         f = Food.objects.get(id=1)
         print(f.company.name)
         if search:
-            context['foods'] = Food.objects.filter(Q(title__icontains=search)|
+            context['products'] = Food.objects.filter(Q(title__icontains=search)|
                                                        Q(company__name__icontains=search))
 
         else:
-            context['foods'] = Food.objects.all()
+            context['products'] = Food.objects.all()
         return context
 
 
@@ -47,6 +48,7 @@ class CompanyDetailView(DetailView):
     model = Company
     template_name = 'company_detail.html'
     context_object_name = 'company'
+    
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -54,9 +56,11 @@ class CompanyDetailView(DetailView):
         return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        print(self.context)
         context = super().get_context_data(**kwargs)
-        context['foods'] = Food.objects.filter(company_id=self.slug)
+        context['products'] = Food.objects.filter(company_id=self.slug)
         return context
+
 
 
 
@@ -69,6 +73,8 @@ class FoodDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['product']= get_object_or_404(Food, id=1)
+        context['cart_product_form'] = CartAddProductForm()
         return context
 
 
